@@ -1,18 +1,17 @@
-// Step 1
 // We skip the service worker for localhost so we don't need
 // to worry about clearing the cache during local development
 if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
-// Once the caching service worker is installed the application
-// can be loaded offline; files are served from the worker
-navigator.serviceWorker.register('service-worker.js');
+  // Once the caching service worker is installed the application
+  // can be loaded offline; files are served from the worker
+  navigator.serviceWorker.register('service-worker.js');
 }
+
+// APP
+
 (async() => {
-  console.log(window)
-  // Step 2
   const app = new PIXI.Application();
   const currentOrientation = {portrait: false, landscape: false};
 
-  // Step 3
   await app.init({
     autoStart: false,
     resizeTo: window,
@@ -24,7 +23,6 @@ navigator.serviceWorker.register('service-worker.js');
   app.canvas.style.position = 'absolute';
   globalThis.__PIXI_APP__ = app;
 
-  // Step 4
   document.body.appendChild(app.canvas);
 
   function resizeElements() {
@@ -34,10 +32,7 @@ navigator.serviceWorker.register('service-worker.js');
             child.width = app.screen.width;
             child.height = app.screen.height;
           } else {
-            //child.x = app.renderer.width / 2;
-            //child.y = app.renderer.height / 2;
             child.scale.set(Math.min(app.renderer.width / child.texture.width, app.renderer.height / child.texture.height));
-
           }
         }
         if (child instanceof GameObject) {
@@ -46,7 +41,7 @@ navigator.serviceWorker.register('service-worker.js');
           app.stage.addChild(child.sprite)
         }
     });
-    }
+  }
 
 
   window.addEventListener('resize', () => {
@@ -58,7 +53,6 @@ navigator.serviceWorker.register('service-worker.js');
         currentOrientation.landscape = false;
     }
 
-    console.log(currentOrientation);
     app.renderer.resize(window.innerWidth, window.innerHeight);
     resizeElements();
   })
@@ -77,6 +71,8 @@ navigator.serviceWorker.register('service-worker.js');
 
 
 })();
+
+//APP
 
 async function createTopUi(app) {
   const topBarBg = new GameObject(await PIXI.Assets.load("assets/ui/top/coin_bg(1).png"));
@@ -120,64 +116,64 @@ async function createTopUi(app) {
 }
 
 async function createBottomUi(app) {
-    const botBgObject = new GameObject(await PIXI.Assets.load("assets/ui/bot.png"));
-    const botBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_red(1).png"));
-    const botBgDiceIconObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_dice_icon.png"));
-    const botLeftBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_rightBgButton.png"));
-    const botRightBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_leftBgButton.png"));
-    const botRightButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/news_icon.png"));
-    const botLeftButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/MB_icon.png"));
-    const botMiddleLight = new GameObject(await PIXI.Assets.load("assets/ui/Light.png"));
+  const botBgObject = new GameObject(await PIXI.Assets.load("assets/ui/bot.png"));
+  const botBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_red(1).png"));
+  const botBgDiceIconObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_dice_icon.png"));
+  const botLeftBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_rightBgButton.png"));
+  const botRightBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_leftBgButton.png"));
+  const botRightButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/news_icon.png"));
+  const botLeftButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/MB_icon.png"));
+  const botMiddleLight = new GameObject(await PIXI.Assets.load("assets/ui/Light.png"));
 
-    botBgObject.sprite.anchor.set(0.5, 1);
-    botBgObject.position.x = () => { return app.renderer.width / 2; };
-    botBgObject.position.y = () => { return app.renderer.height; };
+  botBgObject.sprite.anchor.set(0.5, 1);
+  botBgObject.position.x = () => { return app.renderer.width / 2; };
+  botBgObject.position.y = () => { return app.renderer.height; };
 
-    botBgButtonObject.sprite.anchor.set(0.5, 1);
-    botBgButtonObject.position.x = () => { return app.renderer.width / 2; };
-    botBgButtonObject.position.y = () => { return app.renderer.height; };
-    botBgButtonObject.sprite.alpha = 0.5;
+  botBgButtonObject.sprite.anchor.set(0.5, 1);
+  botBgButtonObject.position.x = () => { return app.renderer.width / 2; };
+  botBgButtonObject.position.y = () => { return app.renderer.height; };
+  botBgButtonObject.sprite.alpha = 0.5;
 
-    botBgDiceIconObject.sprite.anchor.set(0.5, 1);
-    botBgDiceIconObject.position.x = () => { return app.renderer.width / 2; };
-    botBgDiceIconObject.position.y = () => { return app.renderer.height; };
+  botBgDiceIconObject.sprite.anchor.set(0.5, 1);
+  botBgDiceIconObject.position.x = () => { return app.renderer.width / 2; };
+  botBgDiceIconObject.position.y = () => { return app.renderer.height; };
 
-    botRightBgButtonObject.sprite.anchor.set(1);
-    botRightBgButtonObject.position.x = () => { return app.renderer.width; };
-    botRightBgButtonObject.position.y = () => { return app.renderer.height; };
+  botRightBgButtonObject.sprite.anchor.set(1);
+  botRightBgButtonObject.position.x = () => { return app.renderer.width; };
+  botRightBgButtonObject.position.y = () => { return app.renderer.height; };
 
-    botLeftBgButtonObject.sprite.anchor.set(1);
-    botLeftBgButtonObject.position.x = () => { return app.renderer.width; };
-    botLeftBgButtonObject.position.y = () => { return app.renderer.height; };
+  botLeftBgButtonObject.sprite.anchor.set(1);
+  botLeftBgButtonObject.position.x = () => { return app.renderer.width; };
+  botLeftBgButtonObject.position.y = () => { return app.renderer.height; };
 
-    botRightButtonIconObject.sprite.anchor.set(1);
-    botRightButtonIconObject.position.x = () => { return app.renderer.width; };
-    botRightButtonIconObject.position.y = () => { return app.renderer.height; };
+  botRightButtonIconObject.sprite.anchor.set(1);
+  botRightButtonIconObject.position.x = () => { return app.renderer.width; };
+  botRightButtonIconObject.position.y = () => { return app.renderer.height; };
 
-    botRightButtonIconObject.sprite.anchor.set(1);
-    botRightButtonIconObject.position.x = () => { return app.renderer.width; };
-    botRightButtonIconObject.position.y = () => { return app.renderer.height; };
+  botRightButtonIconObject.sprite.anchor.set(1);
+  botRightButtonIconObject.position.x = () => { return app.renderer.width; };
+  botRightButtonIconObject.position.y = () => { return app.renderer.height; };
 
-    botLeftButtonIconObject.sprite.anchor.set(1);
-    botLeftButtonIconObject.position.x = () => { return app.renderer.width; };
-    botLeftButtonIconObject.position.y = () => { return app.renderer.height; };
+  botLeftButtonIconObject.sprite.anchor.set(1);
+  botLeftButtonIconObject.position.x = () => { return app.renderer.width; };
+  botLeftButtonIconObject.position.y = () => { return app.renderer.height; };
 
-    botMiddleLight.sprite.anchor.set(1);
-    botMiddleLight.position.x = () => { return app.renderer.width; };
-    botMiddleLight.position.y = () => { return app.renderer.height; };
+  botMiddleLight.sprite.anchor.set(1);
+  botMiddleLight.position.x = () => { return app.renderer.width; };
+  botMiddleLight.position.y = () => { return app.renderer.height; };
 
-    botBgObject.fitToScreen(app);
-    botBgButtonObject.fitToScreen(app);
-    botBgDiceIconObject.fitToScreen(app);
-    botLeftBgButtonObject.fitToScreen(app);
-    botLeftButtonIconObject.fitToScreen(app);
-    botRightBgButtonObject.fitToScreen(app);
-    botRightButtonIconObject.fitToScreen(app);
-    botMiddleLight.fitToScreen(app);
-    app.stage.addChild(botBgObject, botBgButtonObject, botBgDiceIconObject,
-        botLeftBgButtonObject, botLeftButtonIconObject,
-        botRightBgButtonObject, botRightButtonIconObject,
-        botMiddleLight);
+  botBgObject.fitToScreen(app);
+  botBgButtonObject.fitToScreen(app);
+  botBgDiceIconObject.fitToScreen(app);
+  botLeftBgButtonObject.fitToScreen(app);
+  botLeftButtonIconObject.fitToScreen(app);
+  botRightBgButtonObject.fitToScreen(app);
+  botRightButtonIconObject.fitToScreen(app);
+  botMiddleLight.fitToScreen(app);
+  app.stage.addChild(botBgObject, botBgButtonObject, botBgDiceIconObject,
+      botLeftBgButtonObject, botLeftButtonIconObject,
+      botRightBgButtonObject, botRightButtonIconObject,
+      botMiddleLight);
 }
 
 async function createClouds(app) {
@@ -226,13 +222,14 @@ async function createBackground(app) {
   const texture = await PIXI.Assets.load("assets/background/bg.png");
   const sprite = new PIXI.Sprite(texture);
 
-  //sprite.anchor.set(0.5);
   sprite.width = app.screen.width;
   sprite.height = app.screen.height;
   sprite.label = "Background";
 
   app.stage.addChild(sprite);
 }
+
+// Small Sprite Wrapper
 
 class GameObject extends PIXI.Sprite{
   constructor(texture, landscapeTexture) {
@@ -247,7 +244,6 @@ class GameObject extends PIXI.Sprite{
   async init(texturePath) {
     const texture = await PIXI.Assets.load(texturePath);
     this.sprite = new PIXI.Sprite(texture)
-    // async initialization logic
   }
   _texturePath = "";
   sprite;
@@ -257,3 +253,5 @@ class GameObject extends PIXI.Sprite{
     this.sprite.scale.set(Math.min(app.renderer.width / this.sprite.texture.width, app.renderer.height / this.sprite.texture.height))
   }
 }
+
+// Small Sprite Wrapper
