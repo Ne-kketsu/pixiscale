@@ -234,7 +234,7 @@ async function createBackground(app) {
   app.stage.addChild(sprite);
 }
 
-export class GameObject extends PIXI.Sprite{
+class GameObject extends PIXI.Sprite{
   constructor(texture, landscapeTexture) {
     super()
     if (texture != undefined) {
