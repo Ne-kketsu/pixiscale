@@ -1,7 +1,7 @@
 {
     "name": "Ownplay Rescale",
     "short_name": "OwnScale",
-    "start_url": "/",
+    "start_url": "/pixiscale/",
     "display": "fullscreen",
     "orientation": "portrait",
     "icons": [
