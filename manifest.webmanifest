@@ -1,0 +1,20 @@
+{
+    "name": "Ownplay Rescale",
+    "short_name": "OwnScale",
+    "start_url": "/",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "icons": [
+      {
+        "src": "assets/appLogo.jpg",
+        "type": "image/png",
+        "purpose": "maskable",
+        "sizes": "1024x1024"
+      },
+      {
+        "src": "assets/appLogo.jpg",
+        "type": "image/png",
+        "sizes": "1024x1024"
+      }
+    ]
+  }
