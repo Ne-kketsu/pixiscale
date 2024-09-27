@@ -1,6 +1,4 @@
 // Step 1
-import {Application, Graphics, Assets, Texture, Sprite, Container} from 'pixi.js';
-
 // We skip the service worker for localhost so we don't need
 // to worry about clearing the cache during local development
 if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
@@ -9,9 +7,9 @@ if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
 navigator.serviceWorker.register('service-worker.js');
 }
 (async() => {
-  
+  console.log(window)
   // Step 2
-  const app = new Application();
+  const app = new PIXI.Application();
   const currentOrientation = {portrait: false, landscape: false};
 
   // Step 3
@@ -31,7 +29,7 @@ navigator.serviceWorker.register('service-worker.js');
 
   function resizeElements() {
     app.stage.children.forEach(child => {
-        if (child instanceof Sprite) {
+        if (child instanceof PIXI.Sprite) {
           if (child.label == "Background") {
             child.width = app.screen.width;
             child.height = app.screen.height;
@@ -71,12 +69,22 @@ navigator.serviceWorker.register('service-worker.js');
   await createClouds(app);
   await createCity(app);
   await createBottomUi(app);
-  const topBarBg = new GameObject(await Assets.load("assets/ui/top/coin_bg(1).png"));
-  const topMiddleLeftIcon = new GameObject(await Assets.load("assets/ui/top/coin(1).png"));
-  const topMiddleRightIcon = new GameObject(await Assets.load("assets/ui/top/+(1).png"));
-  const topLeftTrailIcon = new GameObject(await Assets.load("assets/ui/top/gamburger_button(1)_variant.png"));
-  const topLeftProfileIcon = new GameObject(await Assets.load("assets/ui/top/profile_icons_0013_variant.png"));
-  const topRightIcon = new GameObject(await Assets.load("assets/ui/top/shield(1)_variant.png"));
+  await createTopUi(app);
+  
+  resizeElements();
+  
+  // MAIN
+
+
+})();
+
+async function createTopUi(app) {
+  const topBarBg = new GameObject(await PIXI.Assets.load("assets/ui/top/coin_bg(1).png"));
+  const topMiddleLeftIcon = new GameObject(await PIXI.Assets.load("assets/ui/top/coin(1).png"));
+  const topMiddleRightIcon = new GameObject(await PIXI.Assets.load("assets/ui/top/+(1).png"));
+  const topLeftTrailIcon = new GameObject(await PIXI.Assets.load("assets/ui/top/gamburger_button(1)_variant.png"));
+  const topLeftProfileIcon = new GameObject(await PIXI.Assets.load("assets/ui/top/profile_icons_0013_variant.png"));
+  const topRightIcon = new GameObject(await PIXI.Assets.load("assets/ui/top/shield(1)_variant.png"));
 
   topBarBg.sprite.anchor.set(0.5, 0.305);
   topBarBg.position.x = () => { return app.renderer.width / 2; };
@@ -99,33 +107,27 @@ navigator.serviceWorker.register('service-worker.js');
   topLeftProfileIcon.position.y = () => { return 0; };
 
   topRightIcon.sprite.anchor.set(0.58, 0.315);
-  topRightIcon.position.x = () => { return app.renderer.width };
+  topRightIcon.position.x = () => { return app.renderer.width; };
   topRightIcon.position.y = () => { return 0; };
 
-  topBarBg.fitToScreen(app)
+  topBarBg.fitToScreen(app);
   topMiddleLeftIcon.fitToScreen(app);
   topMiddleRightIcon.fitToScreen(app);
   topLeftTrailIcon.fitToScreen(app);
   topLeftProfileIcon.fitToScreen(app);
   topRightIcon.fitToScreen(app);
   app.stage.addChild(topBarBg, topMiddleLeftIcon, topMiddleRightIcon, topLeftTrailIcon, topLeftProfileIcon, topRightIcon);
-  
-  resizeElements();
-  
-  // MAIN
-
-
-})();
+}
 
 async function createBottomUi(app) {
-    const botBgObject = new GameObject(await Assets.load("assets/ui/bot.png"));
-    const botBgButtonObject = new GameObject(await Assets.load("assets/ui/Button_red(1).png"));
-    const botBgDiceIconObject = new GameObject(await Assets.load("assets/ui/Button_dice_icon.png"));
-    const botLeftBgButtonObject = new GameObject(await Assets.load("assets/ui/bot_rightBgButton.png"));
-    const botRightBgButtonObject = new GameObject(await Assets.load("assets/ui/bot_leftBgButton.png"));
-    const botRightButtonIconObject = new GameObject(await Assets.load("assets/ui/news_icon.png"));
-    const botLeftButtonIconObject = new GameObject(await Assets.load("assets/ui/MB_icon.png"));
-    const botMiddleLight = new GameObject(await Assets.load("assets/ui/Light.png"));
+    const botBgObject = new GameObject(await PIXI.Assets.load("assets/ui/bot.png"));
+    const botBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_red(1).png"));
+    const botBgDiceIconObject = new GameObject(await PIXI.Assets.load("assets/ui/Button_dice_icon.png"));
+    const botLeftBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_rightBgButton.png"));
+    const botRightBgButtonObject = new GameObject(await PIXI.Assets.load("assets/ui/bot_leftBgButton.png"));
+    const botRightButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/news_icon.png"));
+    const botLeftButtonIconObject = new GameObject(await PIXI.Assets.load("assets/ui/MB_icon.png"));
+    const botMiddleLight = new GameObject(await PIXI.Assets.load("assets/ui/Light.png"));
 
     botBgObject.sprite.anchor.set(0.5, 1);
     botBgObject.position.x = () => { return app.renderer.width / 2; };
@@ -179,10 +181,10 @@ async function createBottomUi(app) {
 }
 
 async function createClouds(app) {
-  const cloud1Object = new GameObject(await Assets.load("assets/background/cloud.png"));
-  const cloud2Object = new GameObject(await Assets.load("assets/background/cloud2.png"));
-  const cloud3Object = new GameObject(await Assets.load("assets/background/cloud3.png"));
-  const cloud3bisObject = new GameObject(await Assets.load("assets/background/cloud3.png"));
+  const cloud1Object = new GameObject(await PIXI.Assets.load("assets/background/cloud.png"));
+  const cloud2Object = new GameObject(await PIXI.Assets.load("assets/background/cloud2.png"));
+  const cloud3Object = new GameObject(await PIXI.Assets.load("assets/background/cloud3.png"));
+  const cloud3bisObject = new GameObject(await PIXI.Assets.load("assets/background/cloud3.png"));
 
   cloud1Object.sprite.anchor.set(0.5);
   cloud1Object.position.x = () => { return app.renderer.width / 4; };
@@ -209,7 +211,7 @@ async function createClouds(app) {
 }
 
 async function createCity(app) {
-  const gameObject = new GameObject(await Assets.load("assets/background/city.png"));
+  const gameObject = new GameObject(await PIXI.Assets.load("assets/background/city.png"));
   
   gameObject.sprite.anchor.set(0.5);
   gameObject.position.x = () => { return app.renderer.width / 2; };
@@ -221,8 +223,8 @@ async function createCity(app) {
 }
 
 async function createBackground(app) {
-  const texture = await Assets.load("assets/background/bg.png");
-  const sprite = new Sprite(texture);
+  const texture = await PIXI.Assets.load("assets/background/bg.png");
+  const sprite = new PIXI.Sprite(texture);
 
   //sprite.anchor.set(0.5);
   sprite.width = app.screen.width;
@@ -232,19 +234,19 @@ async function createBackground(app) {
   app.stage.addChild(sprite);
 }
 
-export class GameObject extends Sprite{
+export class GameObject extends PIXI.Sprite{
   constructor(texture, landscapeTexture) {
     super()
     if (texture != undefined) {
-        this.sprite = new Sprite(texture);
+        this.sprite = new PIXI.Sprite(texture);
     }
     if (landscapeTexture != undefined) {
-        this.spriteLandscape = new Sprite(landscapeTexture);
+        this.spriteLandscape = new PIXI.Sprite(landscapeTexture);
     }
   }
   async init(texturePath) {
-    const texture = await Assets.load(texturePath);
-    this.sprite = new Sprite(texture)
+    const texture = await PIXI.Assets.load(texturePath);
+    this.sprite = new PIXI.Sprite(texture)
     // async initialization logic
   }
   _texturePath = "";
