@@ -11,7 +11,7 @@
     </style> 
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 	
-      <!-- my styles -->
+      <!-- my styles 
       <link rel="stylesheet" href="moz.css">
     
       <style>
@@ -29,11 +29,34 @@
         }
       </style>
     
-      <script src="script.js" defer></script>
+      <script src="script.js" defer></script>-->
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-  <header>
+  <button id="startKeepingAwake">Start Keeping Awake</button>
+  <button id="stopKeepingAwake">Stop Keeping Awake</button>
+
+  <script>
+      let keepAwakeInterval;
+
+      function keepScreenAwake() {
+          // Simulate a touch event to keep the screen awake
+          const event = new Event('touchstart', { bubbles: true, cancelable: true });
+          document.dispatchEvent(event);
+      }
+
+      function startKeepingAwake() {
+          keepAwakeInterval = setInterval(keepScreenAwake, 10000); // Adjust the interval as needed
+      }
+
+      function stopKeepingAwake() {
+          clearInterval(keepAwakeInterval);
+      }
+
+      document.getElementById('startKeepingAwake').addEventListener('click', startKeepingAwake);
+      document.getElementById('stopKeepingAwake').addEventListener('click', stopKeepingAwake);
+  </script>
+  <!--<header>
 		<h1>Wake Lock Demo</h1>
 	</header>
 
@@ -47,7 +70,7 @@
 	</section>
 	
 	<p>Wake lock will automatically release if if the tab becomes inactive.</p>
-	<p>To re-activate the wake lock automatically when the tab becomes active again, check this box: <input type="checkbox" id="reaquire" /></p>
+	<p>To re-activate the wake lock automatically when the tab becomes active again, check this box: <input type="checkbox" id="reaquire" /></p>-->
     <script src="./pixi.min.js"></script>
     <script src="./main.js" defer></script>
 </body>
