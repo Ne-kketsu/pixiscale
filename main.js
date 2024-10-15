@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
   // can be loaded offline; files are served from the worker
   navigator.serviceWorker.register('service-worker.js');
 }
-
+/*
 // test support
 let isSupported = false;
 // create a reference for the wake lock
@@ -43,7 +43,7 @@ if (isSupported) {
   
   document.addEventListener('visibilitychange', handleVisibilityChange);
 }
-
+*/
 // APP
 
 (async() => {
