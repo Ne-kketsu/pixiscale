@@ -42,6 +42,7 @@
       function keepScreenAwake() {
           // Simulate a touch event to keep the screen awake
           const event = new Event('touchstart', { bubbles: true, cancelable: true });
+          console.log("test");
           document.dispatchEvent(event);
       }
 
