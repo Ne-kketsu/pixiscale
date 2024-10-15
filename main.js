@@ -17,12 +17,12 @@ if ('wakeLock' in navigator) {
 console.log(isSupported);
 
 if (isSupported) {
-
+  requestWakeLock();
   // create an async function to request a wake lock
   const requestWakeLock = async () => {
     try {
       wakeLock = await navigator.wakeLock.request('screen');
-
+      console.log(wakeLock);
       // listen for our release event
       wakeLock.onrelease = function(ev) {
         console.log(ev);
