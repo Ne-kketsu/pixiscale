@@ -33,6 +33,7 @@ if (isSupported) {
 
     }
   } // requestWakeLock()
+  requestWakeLock();
   
   const handleVisibilityChange = () => {
     if (wakeLock !== null && document.visibilityState === 'visible') {
@@ -41,7 +42,6 @@ if (isSupported) {
   }
   
   document.addEventListener('visibilitychange', handleVisibilityChange);
-  requestWakeLock();
 }
 
 // APP
