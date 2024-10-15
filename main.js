@@ -6,6 +6,44 @@ if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
   navigator.serviceWorker.register('service-worker.js');
 }
 
+// test support
+let isSupported = false;
+// create a reference for the wake lock
+let wakeLock = null;
+
+if ('wakeLock' in navigator) {
+  isSupported = true;
+}
+console.log(isSupported);
+
+if (isSupported) {
+
+  // create an async function to request a wake lock
+  const requestWakeLock = async () => {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+
+      // listen for our release event
+      wakeLock.onrelease = function(ev) {
+        console.log(ev);
+      }
+
+    } catch (err) {
+      // if wake lock request fails - usually system related, such as battery
+      console.log(err.name + err.message);
+
+    }
+  } // requestWakeLock()
+
+  const handleVisibilityChange = () => {
+    if (wakeLock !== null && document.visibilityState === 'visible') {
+      requestWakeLock();
+    }
+  }
+
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+}
+
 // APP
 
 (async() => {
