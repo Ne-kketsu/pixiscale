@@ -17,7 +17,6 @@ if ('wakeLock' in navigator) {
 console.log(isSupported);
 
 if (isSupported) {
-  requestWakeLock();
   // create an async function to request a wake lock
   const requestWakeLock = async () => {
     try {
@@ -34,14 +33,15 @@ if (isSupported) {
 
     }
   } // requestWakeLock()
-
+  
   const handleVisibilityChange = () => {
     if (wakeLock !== null && document.visibilityState === 'visible') {
       requestWakeLock();
     }
   }
-
+  
   document.addEventListener('visibilitychange', handleVisibilityChange);
+  requestWakeLock();
 }
 
 // APP
