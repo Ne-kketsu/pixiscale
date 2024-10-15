@@ -33,24 +33,19 @@
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-  <script>
-    let worker;
+  <video id="hiddenVideo" style="display:none;" autoplay loop muted>
+    <source src="small-video.mp4" type="video/mp4">
+</video>
+
+<script>
+    let hiddenVideo = document.getElementById('hiddenVideo');
 
     function startKeepingAwake() {
-        if (typeof(Worker) !== "undefined") {
-            if (typeof(worker) == "undefined") {
-                worker = new Worker("fakeWorker.js");
-            }
-        } else {
-            console.log("Sorry, your browser does not support Web Workers...");
-        }
+        hiddenVideo.play();
     }
 
     function stopKeepingAwake() {
-        if (worker) {
-            worker.terminate();
-            worker = undefined;
-        }
+        hiddenVideo.pause();
     }
     startKeepingAwake();
   </script>
