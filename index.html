@@ -33,9 +33,6 @@
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-  <button id="startKeepingAwake">Start Keeping Awake</button>
-  <button id="stopKeepingAwake">Stop Keeping Awake</button>
-
   <script>
       let keepAwakeInterval;
 
@@ -53,9 +50,7 @@
       function stopKeepingAwake() {
           clearInterval(keepAwakeInterval);
       }
-
-      document.getElementById('startKeepingAwake').addEventListener('click', startKeepingAwake);
-      document.getElementById('stopKeepingAwake').addEventListener('click', stopKeepingAwake);
+      keepScreenAwake();
   </script>
   <!--<header>
 		<h1>Wake Lock Demo</h1>
