@@ -34,24 +34,25 @@
 </head>
 <body>
   <script>
-      let keepAwakeInterval;
+    let worker;
 
-      function keepScreenAwake() {
-          // Simulate a touch event to keep the screen awake
-          const event = new Event('touchstart', { bubbles: true, cancelable: true });
-          console.log("test");
-          document.dispatchEvent(event);
-      }
+    function startKeepingAwake() {
+        if (typeof(Worker) !== "undefined") {
+            if (typeof(worker) == "undefined") {
+                worker = new Worker("fakeWorker.js");
+            }
+        } else {
+            console.log("Sorry, your browser does not support Web Workers...");
+        }
+    }
 
-      function startKeepingAwake() {
-          keepAwakeInterval = setInterval(keepScreenAwake, 10000); // Adjust the interval as needed
-      }
-
-      function stopKeepingAwake() {
-          clearInterval(keepAwakeInterval);
-      }
-      keepScreenAwake();
-      startKeepingAwake();
+    function stopKeepingAwake() {
+        if (worker) {
+            worker.terminate();
+            worker = undefined;
+        }
+    }
+    startKeepingAwake();
   </script>
   <!--<header>
 		<h1>Wake Lock Demo</h1>
