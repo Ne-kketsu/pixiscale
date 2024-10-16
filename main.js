@@ -1,3 +1,5 @@
+import NoSleep from '@zakj/no-sleep';
+
 // We skip the service worker for localhost so we don't need
 // to worry about clearing the cache during local development
 if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
@@ -5,6 +7,35 @@ if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
   // can be loaded offline; files are served from the worker
   navigator.serviceWorker.register('service-worker.js');
 }
+
+var noSleep = new NoSleep();
+
+const handleVisibilityChange = () => {
+  if (noSleep !== null && document.visibilityState === 'visible') {
+    // Disable wake lock at some point in the future.
+    // (does not need to be wrapped in any user input event handler)
+    noSleep.enable();
+    console.log("..No Sleep..")
+  } else if (noSleep !== null && document.visibilityState === 'hidden') {
+    noSleep.disable()
+    console.log("..Sleep..")
+  }
+}
+
+document.addEventListener('visibilitychange', handleVisibilityChange);
+
+// Enable wake lock.
+// (must be wrapped in a user input event handler e.g. a mouse or touch handler)
+document.addEventListener(
+  'click',
+  function enableNoSleep() {
+    document.removeEventListener('click', enableNoSleep, false);
+    noSleep.enable();
+    console.log("..No Sleep..")
+  },
+  false,
+);
+
 /*
 // test support
 let isSupported = false;
