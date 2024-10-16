@@ -77,8 +77,7 @@ if (isSupported) {
         })
       }
   })
-  wakeButton.click();
-       
+  
   const handleVisibilityChange = () => {
     if (wakeLock !== null && document.visibilityState === 'visible') {
       requestWakeLock();
@@ -93,5 +92,8 @@ if (isSupported) {
     }
   });
   reaquireCheck.checked = true;
+
+
+  await wakeButton.click();
   
 } // isSupported
