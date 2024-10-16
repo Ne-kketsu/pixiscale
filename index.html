@@ -11,7 +11,7 @@
     </style> 
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 	
-      <!-- my styles 
+      <!-- my styles -->
       <link rel="stylesheet" href="moz.css">
     
       <style>
@@ -29,31 +29,9 @@
         }
       </style>
     
-      <script src="script.js" defer></script>-->
+      <script src="script.js" defer></script>
     <link rel="manifest" href="manifest.webmanifest">
 </head>
-<body>
-  <video id="hiddenVideo" style="display:none;" autoplay loop muted>
-    <source src="small-video.mp4" type="video/mp4">
-</video>
-
-<script>
-    let hiddenVideo = document.getElementById('hiddenVideo');
-
-    function startKeepingAwake() {
-        hiddenVideo.play();
-    }
-
-    function stopKeepingAwake() {
-        hiddenVideo.pause();
-    }
-    startKeepingAwake();
-  </script>
-  <!--<header>
-		<h1>Wake Lock Demo</h1>
-	</header>
-
-	<p>The button below changes depending on whether wake lock is active or not.</p>
 
 	<button data-status="off">Turn Wake Lock ON</button>
 
@@ -63,7 +41,7 @@
 	</section>
 	
 	<p>Wake lock will automatically release if if the tab becomes inactive.</p>
-	<p>To re-activate the wake lock automatically when the tab becomes active again, check this box: <input type="checkbox" id="reaquire" /></p>-->
+	<p>To re-activate the wake lock automatically when the tab becomes active again, check this box: <input type="checkbox" id="reaquire" /></p>
     <script src="./pixi.min.js"></script>
     <script src="./main.js" defer></script>
 </body>
