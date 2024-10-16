@@ -56,16 +56,15 @@ if (isSupported) {
     }
   } // requestWakeLock()
 
-  if (wakeButton.dataset.status === 'off') {
+  /*if (wakeButton.dataset.status === 'off') {
     requestWakeLock()
   } else { // if it's on release it
     wakeLock.release()
       .then(() => {
         wakeLock = null;
       })
-  }
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-  /*
+  }*/
+  
   // if we click our button
   wakeButton.addEventListener('click', () => {
     // if wakelock is off request it
@@ -76,15 +75,16 @@ if (isSupported) {
         .then(() => {
           wakeLock = null;
         })
-    }
-  })*/
-
+      }
+  })
+  wakeButton.click();
+       
   const handleVisibilityChange = () => {
     if (wakeLock !== null && document.visibilityState === 'visible') {
       requestWakeLock();
     }
   }
-
+  
   reaquireCheck.addEventListener('change', () => {
     if (reaquireCheck.checked) {
       document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -92,5 +92,6 @@ if (isSupported) {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
   });
-
+  reaquireCheck.checked = true;
+  
 } // isSupported
