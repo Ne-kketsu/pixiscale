@@ -1,4 +1,4 @@
-import NoSleep from '@zakj/no-sleep';
+import NoSleep from './node_modules/@zakj/no-sleep/dist/no-sleep.js';
 
 // We skip the service worker for localhost so we don't need
 // to worry about clearing the cache during local development
