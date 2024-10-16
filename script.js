@@ -92,8 +92,14 @@ if (isSupported) {
     }
   });
   reaquireCheck.checked = true;
+  document.addEventListener('visibilitychange', handleVisibilityChange);
 
 
-  await wakeButton.click();
+
+  requestWakeLock();
+  setTimeout(() => {
+    console.log("Enabling Wake Lock..")
+    requestWakeLock();
+  }, 1000);
   
 } // isSupported
